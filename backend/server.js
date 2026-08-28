@@ -34,7 +34,12 @@ app.use(
 );
 app.use(express.json());
 
-app.get("/api/health", (req, res) => res.json({ status: "ok" }));
+app.get("/", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Ashmir Mocktails API is running",
+  });
+});
 
 app.use("/api/auth", authRoutes);
 app.use("/api/services", serviceRoutes);
