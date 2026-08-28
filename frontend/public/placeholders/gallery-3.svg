@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 850" width="700" height="850">
+  <defs>
+    <linearGradient id="bg32" x1="0%" y1="0%" x2="100%" y2="100%" gradientTransform="rotate(49)">
+      <stop offset="0%" stop-color="#080808"/>
+      <stop offset="55%" stop-color="#151515"/>
+      <stop offset="100%" stop-color="#3A1018"/>
+    </linearGradient>
+    <radialGradient id="glow32" cx="64%" cy="36%" r="60%">
+      <stop offset="0%" stop-color="#D6B56A" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#D6B56A" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="700" height="850" fill="url(#bg32)"/>
+  <rect width="700" height="850" fill="url(#glow32)"/>
+  <rect x="0" y="0" width="700" height="850" fill="none" stroke="#D6B56A" stroke-opacity="0.15" stroke-width="1"/>
+  <line x1="310.0" y1="407.0" x2="390.0" y2="407.0" stroke="#B8944F" stroke-width="1" opacity="0.7" transform="translate(0,-34)"/>
+  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle"
+        font-family="Georgia, 'Times New Roman', serif" font-size="31"
+        fill="#D6B56A" letter-spacing="2">ASHMIR</text>
+  <text x="50%" y="459.0" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#9C9C9C" letter-spacing="3">BIRTHDAY BAR</text>
+</svg>
