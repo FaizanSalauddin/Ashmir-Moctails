@@ -32,6 +32,8 @@ export default function BookingForm({ onSuccess }) {
   const [values, setValues] = useState(initialState);
   const [errors, setErrors] = useState({});
 
+  const today = new Date().toISOString().split("T")[0];
+
   const update = (field, value) => {
     setValues((v) => ({ ...v, [field]: value }));
     if (errors[field]) setErrors((e) => ({ ...e, [field]: undefined }));
@@ -110,6 +112,7 @@ export default function BookingForm({ onSuccess }) {
             <input
               id="eventDate"
               type="date"
+              min={today}
               className={inputClass}
               value={values.eventDate}
               onChange={(e) => update("eventDate", e.target.value)}
@@ -172,16 +175,14 @@ export default function BookingForm({ onSuccess }) {
                 type="button"
                 onClick={() => toggleService(service)}
                 aria-pressed={checked}
-                className={`flex items-center gap-3 rounded-lg border px-4 py-3 text-left text-sm transition-colors duration-300 ${
-                  checked
+                className={`flex items-center gap-3 rounded-lg border px-4 py-3 text-left text-sm transition-colors duration-300 ${checked
                     ? "border-gold bg-gold/10 text-[var(--text-primary)]"
                     : "border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-gold"
-                }`}
+                  }`}
               >
                 <span
-                  className={`flex h-5 w-5 shrink-0 items-center justify-center rounded border ${
-                    checked ? "border-gold bg-gold text-obsidian" : "border-[var(--border-subtle)]"
-                  }`}
+                  className={`flex h-5 w-5 shrink-0 items-center justify-center rounded border ${checked ? "border-gold bg-gold text-obsidian" : "border-[var(--border-subtle)]"
+                    }`}
                 >
                   {checked && <Check size={12} strokeWidth={3} />}
                 </span>
