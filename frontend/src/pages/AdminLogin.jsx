@@ -22,7 +22,7 @@ export default function AdminLogin() {
   };
 
   const handleForgotPassword = () => {
-    // Replace this number with Faizan's WhatsApp number.
+  
     const developerWhatsApp = "91XXXXXXXXXX";
 
     const message = encodeURIComponent(

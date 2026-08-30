@@ -2,10 +2,8 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 
-
 import { connectDB } from "./config/db.js";
 import { notFound, errorHandler } from "./middleware/errorHandler.js";
-
 import authRoutes from "./routes/authRoutes.js";
 import serviceRoutes from "./routes/serviceRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
@@ -15,23 +13,27 @@ import reviewRoutes from "./routes/reviewRoutes.js";
 import settingsRoutes from "./routes/settingsRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
 
-
-// console.log("ENV TEST:", {
-//   cwd: process.cwd(),
-//   cloudName: process.env.CLOUDINARY_CLOUD_NAME,
-//   apiKey: process.env.CLOUDINARY_API_KEY
-//     ? "LOADED"
-//     : "MISSING",
-// });
-
 const app = express();
 
+const allowedOrigins = [
+  "https://ashmirmocktail.vercel.app",
+  "http://localhost:5173",
+  "http://localhost:3000",
+];
+
 const corsOrigin = process.env.CORS_ORIGIN;
+
 app.use(
   cors({
-    origin: corsOrigin ? corsOrigin.split(",").map((o) => o.trim()) : true,
+    origin: corsOrigin
+      ? corsOrigin.split(",").map((o) => o.trim())
+      : allowedOrigins,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   })
 );
+
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -56,5 +58,7 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 5000;
 
 connectDB().then(() => {
-  app.listen(PORT, () => console.log(`Ashmir Mocktails API running on port ${PORT}`));
+  app.listen(PORT, () =>
+    console.log(`Ashmir Mocktails API running on port ${PORT}`)
+  );
 });
