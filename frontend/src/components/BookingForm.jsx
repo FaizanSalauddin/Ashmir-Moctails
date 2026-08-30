@@ -16,15 +16,44 @@ const initialState = {
 
 function validate(values) {
   const errors = {};
-  if (!values.fullName.trim()) errors.fullName = "Please enter your name.";
+
+  if (!values.fullName.trim()) {
+    errors.fullName = "Please enter your name.";
+  }
+
   if (!values.whatsappNumber.trim()) {
     errors.whatsappNumber = "Please enter a WhatsApp number.";
-  } else if (!/^[+\d][\d\s-]{7,}$/.test(values.whatsappNumber.trim())) {
-    errors.whatsappNumber = "Please enter a valid phone number.";
+  } else {
+    const phone = values.whatsappNumber.trim().replace(/[\s-]/g, "");
+    const phoneRegex = /^(?:\+91)?[6-9]\d{9}$/;
+
+    if (!phoneRegex.test(phone)) {
+      errors.whatsappNumber =
+        "Please enter a valid 10-digit Indian mobile number.";
+    }
   }
-  if (!values.eventDate) errors.eventDate = "Please select an event date.";
-  if (!values.eventType) errors.eventType = "Please select an event type.";
-  if (!values.venue.trim()) errors.venue = "Please enter a venue or location.";
+
+  if (!values.eventDate) {
+    errors.eventDate = "Please select an event date.";
+  } else {
+    const today = new Date();
+    const selectedDate = new Date(values.eventDate + "T00:00:00");
+
+    today.setHours(0, 0, 0, 0);
+
+    if (selectedDate < today) {
+      errors.eventDate = "Event date cannot be in the past.";
+    }
+  }
+
+  if (!values.eventType) {
+    errors.eventType = "Please select an event type.";
+  }
+
+  if (!values.venue.trim()) {
+    errors.venue = "Please enter a venue or location.";
+  }
+
   return errors;
 }
 
@@ -176,8 +205,8 @@ export default function BookingForm({ onSuccess }) {
                 onClick={() => toggleService(service)}
                 aria-pressed={checked}
                 className={`flex items-center gap-3 rounded-lg border px-4 py-3 text-left text-sm transition-colors duration-300 ${checked
-                    ? "border-gold bg-gold/10 text-[var(--text-primary)]"
-                    : "border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-gold"
+                  ? "border-gold bg-gold/10 text-[var(--text-primary)]"
+                  : "border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-gold"
                   }`}
               >
                 <span
